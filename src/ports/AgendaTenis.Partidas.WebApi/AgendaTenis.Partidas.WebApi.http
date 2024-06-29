@@ -1,0 +1,6 @@
+@AgendaTenis.Partidas.WebApi_HostAddress = http://localhost:5237
+
+GET {{AgendaTenis.Partidas.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

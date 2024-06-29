@@ -1,0 +1,1 @@
+docker run -d --rm --name webapp-mongodb --network devweek_net --hostname webapp-mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME="mongouser" -e MONGO_INITDB_ROOT_PASSWORD="eprPs2UEJ239RvH7SicPkcFbkTQoa8" mongo:latest
