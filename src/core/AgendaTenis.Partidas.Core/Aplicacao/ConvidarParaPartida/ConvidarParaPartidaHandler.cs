@@ -19,7 +19,8 @@ public class ConvidarParaPartidaHandler
             request.DesafianteId,
             request.AdversarioId,
             request.DataDaPartida,
-            request.DescricaoLocal,
+            request.IdCidade,
+            request.NomeCidade,
             request.ModeloDaPartida);
 
             await _partidaRepositorio.InsertAsync(partida);

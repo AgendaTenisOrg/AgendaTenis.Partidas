@@ -13,6 +13,8 @@ using AgendaTenis.Partidas.WebApi.Polices;
 using AgendaTenis.WebApi.ConfiguracaoDeServicos;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
+using RabbitMQ.Client;
+using static System.Net.WebRequestMethods;
 
 namespace AgendaTenis.Partidas.WebApi
 {

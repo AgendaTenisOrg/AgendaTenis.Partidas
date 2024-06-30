@@ -18,7 +18,7 @@ public class ObterConvitesPendentesHandler
 
     public async Task<ObterConvitesPendentesResponse> Handle(ObterConvitesPendentesCommand request, CancellationToken cancellationToken)
     {
-        string recordId = $"_partidas_convitespendentes_{request.UsuarioId}";
+        string recordId = $"convitespendentes:{request.UsuarioId}";
         var convites = await _cache.GetRecordAsync<ObterConvitesPendentesResponse>(recordId);
 
         if (convites is null)
@@ -33,7 +33,8 @@ public class ObterConvitesPendentesHandler
                     DesafianteId = p.DesafianteId,
                     AdversarioId = p.AdversarioId,
                     DataDaPartida = p.DataDaPartida,
-                    DescricaoLocal = p.DescricaoLocal,
+                    IdCidade = p.Cidade.Id,
+                    NomeCidade = p.Cidade.Nome,
                     ModeloDaPartida = p.ModeloDaPartida
                 }).ToList()
             };

@@ -17,7 +17,7 @@ public class ObterConfirmacoesDePlacarPendentesHandler
 
     public async Task<ObterConfirmacoesDePlacarPendentesResponse> Handle(ObterConfirmacoesDePlacarPendentesCommand request, CancellationToken cancellationToken)
     {
-        string recordId = $"_partidas_confirmacoesdeplacar_{request.UsuarioId}";
+        string recordId = $"confirmacoesdeplacar:{request.UsuarioId}";
         var confirmacoesDePlacar = await _cache.GetRecordAsync<ObterConfirmacoesDePlacarPendentesResponse>(recordId);
 
         if (confirmacoesDePlacar is null)
@@ -32,7 +32,8 @@ public class ObterConfirmacoesDePlacarPendentesHandler
                     DesafianteId = p.DesafianteId,
                     AdversarioId = p.AdversarioId,
                     DataDaPartida = p.DataDaPartida,
-                    DescricaoLocal = p.DescricaoLocal,
+                    IdCidade = p.Cidade.Id,
+                    NomeCidade = p.Cidade.Nome,
                     ModeloDaPartida = p.ModeloDaPartida
                 }).ToList()
             };

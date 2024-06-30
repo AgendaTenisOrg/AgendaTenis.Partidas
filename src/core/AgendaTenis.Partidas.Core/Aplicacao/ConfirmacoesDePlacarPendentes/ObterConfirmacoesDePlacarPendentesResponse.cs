@@ -12,7 +12,8 @@ public class ObterConfirmacoesDePlacarPendentesResponse
         public int DesafianteId { get; set; }
         public int AdversarioId { get; set; }
         public DateTime DataDaPartida { get; set; }
-        public string DescricaoLocal { get; set; }
+        public int IdCidade { get; set; }
+        public string NomeCidade { get; set; }
         public ModeloPartidaEnum ModeloDaPartida { get; set; }
     }
 }
