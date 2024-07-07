@@ -36,6 +36,5 @@ public static class Autenticacao
     public class JwtOptions
     {
         public SigningCredentials SigningCredentials { get; set; }
-        public int ExpiracaoEmSegundos { get; set; }
     }
 }
