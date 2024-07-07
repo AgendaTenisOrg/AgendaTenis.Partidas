@@ -1,7 +1,7 @@
-﻿using AgendaTenis.Infra.Eventos.Base;
-using AgendaTenis.Infra.Eventos.Constantes;
-using AgendaTenis.Infra.Eventos.Mensagens;
-using AgendaTenis.Infra.Eventos.Servicos;
+﻿using AgendaTenis.Eventos.Base;
+using AgendaTenis.Eventos.Constantes;
+using AgendaTenis.Eventos.Mensagens;
+using AgendaTenis.Eventos.Servicos;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;

@@ -1,4 +1,6 @@
-﻿using AgendaTenis.Partidas.Core.Dominio;
+﻿using AgendaTenis.Notificacoes.Core;
+using AgendaTenis.Notificacoes.Core.Enums;
+using AgendaTenis.Partidas.Core.Dominio;
 using AgendaTenis.Partidas.Core.Enums;
 using AgendaTenis.Partidas.Core.Repositorios;
 
@@ -20,7 +22,7 @@ public class RegistrarPlacarHandler
             var partida = await _partidaRepositorio.ObterPorIdAsync(request.Id.ToString());
 
             var notificacoes = ExecutarValidacoes(partida);
-            if (notificacoes.Any(c => c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Erro || c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Aviso))
+            if (notificacoes.Any(c => c.Tipo == TipoNotificacaoEnum.Erro || c.Tipo == TipoNotificacaoEnum.Aviso))
             {
                 return new RegistrarPlacarResponse()
                 {
@@ -46,12 +48,12 @@ public class RegistrarPlacarHandler
                 return new RegistrarPlacarResponse()
                 {
                     Sucesso = false,
-                    Notificacoes = new List<Notificacoes.Notificacao>()
+                    Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Partida não foi atualizada",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                            Tipo = TipoNotificacaoEnum.Aviso
                         }
                     }
                 };
@@ -62,52 +64,52 @@ public class RegistrarPlacarHandler
             return new RegistrarPlacarResponse()
             {
                 Sucesso = false,
-                Notificacoes = new List<Notificacoes.Notificacao>()
+                Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Erro ao atualizar partida",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Erro
+                            Tipo = TipoNotificacaoEnum.Erro
                         }
                     }
             };
         }
     }
 
-    private List<Notificacoes.Notificacao> ExecutarValidacoes(Partida partida)
+    private List<Notificacao> ExecutarValidacoes(Partida partida)
     {
-        var notificacoes = new List<Notificacoes.Notificacao>();
+        var notificacoes = new List<Notificacao>();
 
         if (partida is null)
         {
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Partida não encontrada",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
             return notificacoes;
         }
 
         if (partida.StatusConvite != StatusConviteEnum.Aceito)
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Não é possível atualizar o placar, pois o convite para a partida não foi aceito",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
         if (DateTime.UtcNow < partida.DataDaPartida.ToUniversalTime())
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Não é possível atualizar o placar, pois a partida ainda não aconteceu",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
         if (partida.StatusPlacar != null)
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Placar já foi registrado.",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
         return notificacoes;

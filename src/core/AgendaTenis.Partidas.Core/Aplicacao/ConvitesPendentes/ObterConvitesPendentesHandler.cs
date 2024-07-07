@@ -1,7 +1,7 @@
-﻿using AgendaTenis.Partidas.Core.Enums;
+﻿using AgendaTenis.Cache.Core;
+using AgendaTenis.Partidas.Core.Enums;
 using AgendaTenis.Partidas.Core.Repositorios;
 using Microsoft.Extensions.Caching.Distributed;
-using AgendaTenis.Infra.Cache;
 
 namespace AgendaTenis.Partidas.Core.Aplicacao.ConvitesPendentes;
 

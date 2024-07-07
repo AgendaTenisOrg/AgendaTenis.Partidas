@@ -1,4 +1,6 @@
-﻿using AgendaTenis.Infra.Eventos.Mensagens;
+﻿using AgendaTenis.Eventos.Mensagens;
+using AgendaTenis.Notificacoes.Core;
+using AgendaTenis.Notificacoes.Core.Enums;
 using AgendaTenis.Partidas.Core.Dominio;
 using AgendaTenis.Partidas.Core.Enums;
 using AgendaTenis.Partidas.Core.Eventos.Publishers;
@@ -26,7 +28,7 @@ public class ResponderPlacarHandler
             var partida = await _partidaRepositorio.ObterPorIdAsync(request.Id);
 
             var notificacoes = ExecutarValidacoes(partida);
-            if (notificacoes.Any(c => c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Erro || c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Aviso))
+            if (notificacoes.Any(c => c.Tipo == TipoNotificacaoEnum.Erro || c.Tipo == TipoNotificacaoEnum.Aviso))
             {
                 return new ResponderPlacarResponse()
                 {
@@ -64,12 +66,12 @@ public class ResponderPlacarHandler
                 return new ResponderPlacarResponse()
                 {
                     Sucesso = false,
-                    Notificacoes = new List<Notificacoes.Notificacao>()
+                    Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Partida não foi atualizada",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                            Tipo = TipoNotificacaoEnum.Aviso
                         }
                     }
                 };
@@ -80,38 +82,38 @@ public class ResponderPlacarHandler
             return new ResponderPlacarResponse()
             {
                 Sucesso = false,
-                Notificacoes = new List<Notificacoes.Notificacao>()
+                Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Erro ao atualizar partida",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Erro
+                            Tipo = TipoNotificacaoEnum.Erro
                         }
                     }
             };
         }
     }
 
-    private List<Notificacoes.Notificacao> ExecutarValidacoes(Partida partida)
+    private List<Notificacao> ExecutarValidacoes(Partida partida)
     {
-        var notificacoes = new List<Notificacoes.Notificacao>();
+        var notificacoes = new List<Notificacao>();
 
         if (partida is null)
         {
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Partida não encontrada",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
             return notificacoes;
         }
 
         if (partida.StatusPlacar != StatusPlacarEnum.AguardandoConfirmacao)
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Não é possível atualizar o placar, pois o status não está Aguardando Confirmação.",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
         return notificacoes;
@@ -126,7 +128,7 @@ public class ResponderPlacarHandler
             AdversarioId = partida.AdversarioId,
             DataDaPartida = partida.DataDaPartida,
             ModeloDaPartida = (int)partida.ModeloDaPartida,
-            VencedorId = partida.VencedorId
+            VencedorId = partida.VencedorId.GetValueOrDefault()
         };
     }
 }

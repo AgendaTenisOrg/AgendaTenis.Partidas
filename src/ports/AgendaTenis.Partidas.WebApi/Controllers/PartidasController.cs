@@ -1,5 +1,4 @@
-﻿using AgendaTenis.Infra.Eventos.Servicos;
-using AgendaTenis.Partidas.Core.Aplicacao.ConfirmacoesDePlacarPendentes;
+﻿using AgendaTenis.Partidas.Core.Aplicacao.ConfirmacoesDePlacarPendentes;
 using AgendaTenis.Partidas.Core.Aplicacao.ConvidarParaPartida;
 using AgendaTenis.Partidas.Core.Aplicacao.ConvitesPendentes;
 using AgendaTenis.Partidas.Core.Aplicacao.HistoricoDePartidas;
@@ -7,7 +6,6 @@ using AgendaTenis.Partidas.Core.Aplicacao.RegistrarPlacar;
 using AgendaTenis.Partidas.Core.Aplicacao.ResponderConvite;
 using AgendaTenis.Partidas.Core.Aplicacao.ResponderPlacar;
 using AgendaTenis.Partidas.WebApi.Polices;
-using AgendaTenis.WebApi.ConfiguracaoDeServicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

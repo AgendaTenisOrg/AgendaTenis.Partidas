@@ -1,4 +1,6 @@
-﻿using AgendaTenis.Partidas.Core.Repositorios;
+﻿using AgendaTenis.Notificacoes.Core;
+using AgendaTenis.Notificacoes.Core.Enums;
+using AgendaTenis.Partidas.Core.Repositorios;
 
 namespace AgendaTenis.Partidas.Core.Aplicacao.ConvidarParaPartida;
 
@@ -35,12 +37,12 @@ public class ConvidarParaPartidaHandler
             return new ConvidarParaPartidaResponse()
             {
                 Sucesso = false,
-                Notificacoes = new List<Notificacoes.Notificacao>()
+                Notificacoes = new List<Notificacao>()
                 {
-                    new Notificacoes.Notificacao()
+                    new Notificacao()
                     {
                         Mensagem = "Erro ao gravar partida",
-                        Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Erro
+                        Tipo = TipoNotificacaoEnum.Erro
                     }
                 }
             };

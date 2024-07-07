@@ -1,4 +1,6 @@
-﻿using AgendaTenis.Partidas.Core.Dominio;
+﻿using AgendaTenis.Notificacoes.Core;
+using AgendaTenis.Notificacoes.Core.Enums;
+using AgendaTenis.Partidas.Core.Dominio;
 using AgendaTenis.Partidas.Core.Enums;
 using AgendaTenis.Partidas.Core.Repositorios;
 
@@ -20,7 +22,7 @@ public class ResponderConviteHandler
             var partida = await _partidaRepositorio.ObterPorIdAsync(request.Id.ToString());
 
             var notificacoes = ExecutarValidacoes(partida);
-            if (notificacoes.Any(c => c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Erro || c.Tipo == Notificacoes.Enums.TipoNotificacaoEnum.Aviso))
+            if (notificacoes.Any(c => c.Tipo == TipoNotificacaoEnum.Erro || c.Tipo == TipoNotificacaoEnum.Aviso))
             {
                 return new ResponderConviteResponse()
                 {
@@ -55,12 +57,12 @@ public class ResponderConviteHandler
                 return new ResponderConviteResponse()
                 {
                     Sucesso = false,
-                    Notificacoes = new List<Notificacoes.Notificacao>()
+                    Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Partida não foi atualizada",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                            Tipo = TipoNotificacaoEnum.Aviso
                         }
                     }
                 };
@@ -71,12 +73,12 @@ public class ResponderConviteHandler
             return new ResponderConviteResponse()
             {
                 Sucesso = false,
-                Notificacoes = new List<Notificacoes.Notificacao>()
+                Notificacoes = new List<Notificacao>()
                     {
-                        new Notificacoes.Notificacao()
+                        new Notificacao()
                         {
                             Mensagem = "Erro ao atualizar partida",
-                            Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Erro
+                            Tipo = TipoNotificacaoEnum.Erro
                         }
                     }
             };
@@ -84,16 +86,16 @@ public class ResponderConviteHandler
 
     }
 
-    private List<Notificacoes.Notificacao> ExecutarValidacoes(Partida partida)
+    private List<Notificacao> ExecutarValidacoes(Partida partida)
     {
-        var notificacoes = new List<Notificacoes.Notificacao>();
+        var notificacoes = new List<Notificacao>();
 
         if (partida is null)
         {
-            notificacoes.Add(new Notificacoes.Notificacao()
+            notificacoes.Add(new Notificacao()
             {
                 Mensagem = "Partida não encontrada",
-                Tipo = Notificacoes.Enums.TipoNotificacaoEnum.Aviso
+                Tipo = TipoNotificacaoEnum.Aviso
             });
 
             return notificacoes;
