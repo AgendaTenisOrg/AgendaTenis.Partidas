@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgendaTenis.Partidas.WebApi.ConfiguracaoDeServicos;
 
-public static class Autenticacao
+public static class AutenticacaoDI
 {
     public static void AdicionarAutenticacaoJWT(this IServiceCollection services, IConfiguration configuration)
     {

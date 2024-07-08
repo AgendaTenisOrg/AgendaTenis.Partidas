@@ -2,7 +2,7 @@
 
 namespace AgendaTenis.Partidas.WebApi.ConfiguracaoDeServicos;
 
-public static class Swagger
+public static class SwaggerDI
 {
     public static void AdicionarConfiguracaoSwagger(this IServiceCollection services)
     {

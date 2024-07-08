@@ -10,6 +10,7 @@
     <PackageReference Include="AgendaTenis.Cache.Core" Version="1.0.0" />
     <PackageReference Include="AgendaTenis.Eventos.Core" Version="1.0.0" />
     <PackageReference Include="AgendaTenis.Notificacoes.Core" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.27.0" />
   </ItemGroup>
 

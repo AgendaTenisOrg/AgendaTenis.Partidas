@@ -7,6 +7,7 @@ using AgendaTenis.Partidas.Core.Aplicacao.ResponderConvite;
 using AgendaTenis.Partidas.Core.Aplicacao.ResponderPlacar;
 using AgendaTenis.Partidas.Core.Eventos.Publishers;
 using AgendaTenis.Partidas.Core.Repositorios;
+using AgendaTenis.Partidas.Core.Servicos;
 using AgendaTenis.Partidas.WebApi.ConfiguracaoDeServicos;
 using AgendaTenis.Partidas.WebApi.Polices;
 using AgendaTenis.WebApi.ConfiguracaoDeServicos;
@@ -62,6 +63,8 @@ public class Startup
         services.AdicionarAutenticacaoJWT(Configuration);
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        services.AdicionarCidadeServico(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

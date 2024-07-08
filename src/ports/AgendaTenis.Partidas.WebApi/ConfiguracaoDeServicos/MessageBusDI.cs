@@ -3,7 +3,7 @@ using AgendaTenis.Eventos.Servicos;
 
 namespace AgendaTenis.WebApi.ConfiguracaoDeServicos;
 
-public static class MessageBus
+public static class MessageBusDI
 {
     public static void RegistrarMessageBus(this IServiceCollection services, IConfiguration configuration)
     {

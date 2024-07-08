@@ -10,6 +10,5 @@ public class ConvidarParaPartidaCommand
     public int AdversarioId { get; set; }
     public DateTime DataDaPartida { get; set; }
     public int IdCidade { get; set; }
-    public string NomeCidade { get; set; }
     public ModeloPartidaEnum ModeloDaPartida { get; set; }
 }
