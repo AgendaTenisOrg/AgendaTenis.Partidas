@@ -19,7 +19,7 @@ public class ObterConvitesPendentesHandler
     public async Task<ObterConvitesPendentesResponse> Handle(ObterConvitesPendentesCommand request, CancellationToken cancellationToken)
     {
         string recordId = $"convitespendentes:{request.UsuarioId}";
-        var convites = await _cache.GetRecordAsync<ObterConvitesPendentesResponse>(recordId);
+        var convites = await _cache.GetRecordAsync<ObterConvitesPendentesResponse>(recordId, lancarException: false);
 
         if (convites is null)
         {
@@ -39,7 +39,7 @@ public class ObterConvitesPendentesHandler
                 }).ToList()
             };
 
-            await _cache.SetRecordAsync(recordId, convites, TimeSpan.FromMinutes(2));
+            await _cache.SetRecordAsync(recordId, convites, TimeSpan.FromMinutes(2), lancarException: false);
         }
 
         return convites;

@@ -18,7 +18,7 @@ public class ObterConfirmacoesDePlacarPendentesHandler
     public async Task<ObterConfirmacoesDePlacarPendentesResponse> Handle(ObterConfirmacoesDePlacarPendentesCommand request, CancellationToken cancellationToken)
     {
         string recordId = $"confirmacoesdeplacar:{request.UsuarioId}";
-        var confirmacoesDePlacar = await _cache.GetRecordAsync<ObterConfirmacoesDePlacarPendentesResponse>(recordId);
+        var confirmacoesDePlacar = await _cache.GetRecordAsync<ObterConfirmacoesDePlacarPendentesResponse>(recordId, lancarException: false);
 
         if (confirmacoesDePlacar is null)
         {
@@ -38,7 +38,7 @@ public class ObterConfirmacoesDePlacarPendentesHandler
                 }).ToList()
             };
 
-            await _cache.SetRecordAsync(recordId, confirmacoesDePlacar, TimeSpan.FromMinutes(2));
+            await _cache.SetRecordAsync(recordId, confirmacoesDePlacar, TimeSpan.FromMinutes(2), lancarException: false);
         }
 
         return confirmacoesDePlacar;
