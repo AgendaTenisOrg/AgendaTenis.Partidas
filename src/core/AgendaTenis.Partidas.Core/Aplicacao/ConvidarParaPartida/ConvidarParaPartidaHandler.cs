@@ -54,8 +54,10 @@ public class ConvidarParaPartidaHandler
                 Sucesso = true
             };
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine(ex.ToString());
+
             return new ConvidarParaPartidaResponse()
             {
                 Sucesso = false,
