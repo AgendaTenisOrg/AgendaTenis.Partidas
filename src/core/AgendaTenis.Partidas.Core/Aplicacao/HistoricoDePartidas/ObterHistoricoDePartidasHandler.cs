@@ -43,8 +43,16 @@ public class ObterHistoricoDePartidasHandler
                 ModeloDaPartida = new Enums.ModeloPartidaEnumModel(p.ModeloDaPartida),
                 StatusConvite = new Enums.StatusConviteEnumModel(p.StatusConvite),
                 StatusPlacar = new Enums.StatusPlacarEnumModel(p.StatusPlacar.GetValueOrDefault()),
-                VencedorId = p.VencedorId
-            }).ToList(),
+                VencedorId = p.VencedorId,
+                Sets = p.Sets?.Select(p => new ObterHistoricoDePartidasResponse.Set()
+                {
+                    NumeroSet = p.NumeroSet,
+                    GamesDesafiante = p.GamesDesafiante,
+                    GamesAdversario = p.GamesAdversario,
+                    TiebreakDesafiante = p.TiebreakDesafiante,
+                    TiebreakAdversario = p.TiebreakAdversario
+                })
+            }),
             TotalDeItens = total
         };
     }
