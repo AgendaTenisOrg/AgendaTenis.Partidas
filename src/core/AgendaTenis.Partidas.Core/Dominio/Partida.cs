@@ -6,10 +6,12 @@ namespace AgendaTenis.Partidas.Core.Dominio;
 
 public class Partida
 {
-    public Partida(int desafianteId, int adversarioId, DateTime dataDaPartida, int idCidade, string nomeCidade, ModeloPartidaEnum modeloDaPartida)
+    public Partida(int desafianteId, string desafianteNome, int adversarioId, string adversarioNome, DateTime dataDaPartida, int idCidade, string nomeCidade, ModeloPartidaEnum modeloDaPartida)
     {
         DesafianteId = desafianteId;
+        DesafianteNome = desafianteNome;
         AdversarioId = adversarioId;
+        AdversarioNome = adversarioNome;
         DataDaPartida = dataDaPartida;
         Cidade = new Cidade(idCidade, nomeCidade);
         ModeloDaPartida = modeloDaPartida;
@@ -20,7 +22,9 @@ public class Partida
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
     public int DesafianteId { get; private set; }
+    public string DesafianteNome { get; private set; }
     public int AdversarioId { get; private set; }
+    public string AdversarioNome { get; private set; }
     public DateTime DataDaPartida { get; private set; }
     public Cidade Cidade { get; private set; }
     public ModeloPartidaEnum ModeloDaPartida { get; private set; }
@@ -57,7 +61,7 @@ public class Cidade
 
     public int Id { get; private set; }
     /// <summary>
-    /// Desnormalização proposital do nome da cidade para melhorar a performance e evitar consultar o serviço de cidades
+    /// Desnormalização do nome da cidade para melhorar a performance e evitar consultar o serviço de cidades
     /// </summary>
     public string Nome { get; private set; }
 }

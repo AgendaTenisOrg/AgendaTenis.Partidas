@@ -41,7 +41,9 @@ public class ConvidarParaPartidaHandler
             }
 
             var partida = new AgendaTenis.Partidas.Core.Dominio.Partida(request.DesafianteId,
+                                                                        request.DesafianteNome,
                                                                         request.AdversarioId,
+                                                                        request.AdversarioNome,
                                                                         request.DataDaPartida,
                                                                         request.IdCidade,
                                                                         cidade.Nome,

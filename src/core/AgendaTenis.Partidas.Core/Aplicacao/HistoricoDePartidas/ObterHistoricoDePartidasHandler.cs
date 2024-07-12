@@ -1,4 +1,5 @@
 ﻿using AgendaTenis.Partidas.Core.Repositorios;
+using System.Linq;
 
 namespace AgendaTenis.Partidas.Core.Aplicacao.HistoricoDePartidas;
 
@@ -25,21 +26,26 @@ public class ObterHistoricoDePartidasHandler
 
         var partidas = await _partidaRepositorio.ObterPartidasPaginado(request.UsuarioId, request.Pagina, request.ItensPorPagina);
 
+        var total = await _partidaRepositorio.ObterTotalDePartidas(request.UsuarioId);
+
         return new ObterHistoricoDePartidasResponse()
         {
             Partidas = partidas.Select(p => new ObterHistoricoDePartidasResponse.Partida()
             {
                 Id = p.Id,
                 DesafianteId = p.DesafianteId,
+                DesafianteNome = p.DesafianteNome,
                 AdversarioId = p.AdversarioId,
+                AdversarioNome = p.AdversarioNome,
                 DataDaPartida = p.DataDaPartida,
                 IdCidade = p.Cidade.Id,
                 NomeCidade = p.Cidade.Nome,
-                ModeloDaPartida = p.ModeloDaPartida,
-                StatusConvite = p.StatusConvite,
-                StatusPlacar = p.StatusPlacar,
+                ModeloDaPartida = new Enums.ModeloPartidaEnumModel(p.ModeloDaPartida),
+                StatusConvite = new Enums.StatusConviteEnumModel(p.StatusConvite),
+                StatusPlacar = new Enums.StatusPlacarEnumModel(p.StatusPlacar.GetValueOrDefault()),
                 VencedorId = p.VencedorId
-            }).ToList()
+            }).ToList(),
+            TotalDeItens = total
         };
     }
 }

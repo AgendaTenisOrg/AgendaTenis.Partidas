@@ -11,4 +11,5 @@ public interface IPartidasRepositorio
     Task<List<Partida>> ObterPartidasPaginado(int usuarioId, int pagina, int itemsPorPagina);
     Task InsertAsync(Partida partida);
     Task<bool> Update(Partida partida);
+    Task<int> ObterTotalDePartidas(int usuarioId);
 }

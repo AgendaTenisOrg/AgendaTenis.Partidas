@@ -81,4 +81,16 @@ public class PartidasRepositorio : IPartidasRepositorio
 
         return partidas;
     }
+
+    public async Task<int> ObterTotalDePartidas(int usuarioId)
+    {
+        var filter = Builders<Partida>.Filter.Or(
+                   Builders<Partida>.Filter.Eq(c => c.DesafianteId, usuarioId),
+                   Builders<Partida>.Filter.Eq(c => c.AdversarioId, usuarioId)
+                );
+
+        var totalPartidas = await _partidasCollection.CountDocumentsAsync(filter);
+
+        return (int)totalPartidas;
+    }
 }
