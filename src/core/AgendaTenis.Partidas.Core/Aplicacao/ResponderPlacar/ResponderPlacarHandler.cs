@@ -49,7 +49,7 @@ public class ResponderPlacarHandler
             }
             else
             {
-                partida.ResponderPlacar(StatusPlacarEnum.Aceito);
+                partida.ResponderPlacar(StatusPlacarEnum.Contestado);
             }
 
             var atualizou = await _partidaRepositorio.Update(partida);
